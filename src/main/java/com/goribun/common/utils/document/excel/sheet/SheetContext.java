@@ -1,6 +1,7 @@
 package com.goribun.common.utils.document.excel.sheet;
 
 import com.goribun.common.utils.document.excel.row.RowContext;
+import com.goribun.common.utils.document.excel.row.RowFactory;
 import com.goribun.common.utils.document.excel.workbook.WorkbookContext;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -13,6 +14,7 @@ public class SheetContext {
     private final Sheet sheet;
     private RowContext currentRow;
     private int index=-1;
+    private int defaultRowIndent = 0;
 
     SheetContext(WorkbookContext workbookContext, Sheet sheet) {
         this.workbookContext = workbookContext;
@@ -31,8 +33,9 @@ public class SheetContext {
             return null;
         }
         if (currentRow == null) {
-            currentRow = new RowContext(Rows.getOrCreate(sheet, rowNo), this, workbookContext, defaultRowIndent);
+            currentRow = new RowContext(RowFactory.getOrCreate(sheet, index), this, workbookContext, defaultRowIndent);
         }
+        return currentRow;
 
     }
 

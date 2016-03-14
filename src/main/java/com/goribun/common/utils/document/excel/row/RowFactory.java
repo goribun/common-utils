@@ -8,10 +8,14 @@ import org.apache.poi.ss.usermodel.Sheet;
  */
 public class RowFactory {
 
-    public getOrCreate(Sheet sheet, int index){
-        if(sheet ==null){
+    public static Row getOrCreate(Sheet sheet, int index) {
+        if (sheet == null) {
             throw new NullPointerException("sheet is null !");
         }
         Row row = sheet.getRow(index);
+        if (row == null) {
+            return sheet.createRow(index);
+        }
+        return row;
     }
 }
